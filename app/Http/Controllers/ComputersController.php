@@ -22,4 +22,21 @@ class ComputersController extends Controller
 
         return view('computers.index', compact('computers'));
     }
+
+    public function create()
+    {
+        return view('computers.create');
+    }
+
+    public function store(Request $request)
+    {
+        $url = env('URL_SERVER_API');
+
+        Http::post($url . '/computers', [
+            'number' => $request->number,
+            'brand'  => $request->brand,
+        ]);
+
+        return redirect()->route('computers.index');
+    }
 }

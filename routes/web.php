@@ -28,8 +28,15 @@ Route::get('/', function () {
 
 // Tablas principales de AdminSena
 Route::get('areas', [AreasController::class, 'index'])->name('areas.index');
+Route::get('areas/create', [AreasController::class, 'create'])->name('areas.create');
+Route::post('areas', [AreasController::class, 'store'])->name('areas.store');
+
 Route::get('training_centers', [TrainingCentersController::class, 'index'])->name('training_centers.index');
+
 Route::get('computers', [ComputersController::class, 'index'])->name('computers.index');
+Route::get('computers/create', [ComputersController::class, 'create'])->name('computers.create');
+Route::post('computers', [ComputersController::class, 'store'])->name('computers.store');
+
 Route::get('courses', [CoursesController::class, 'index'])->name('courses.index');
 Route::get('teachers', [TeachersController::class, 'index'])->name('teachers.index');
 Route::get('apprentices', [ApprenticesController::class, 'index'])->name('apprentices.index');

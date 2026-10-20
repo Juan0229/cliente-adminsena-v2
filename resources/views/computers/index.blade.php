@@ -3,6 +3,8 @@
 @section('content')
     <h1 class="mb-4">Computadores</h1>
 
+    <a href="{{ route('computers.create') }}" class="btn btn-primary mb-3">Crear Computador</a>
+
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
             <tr>

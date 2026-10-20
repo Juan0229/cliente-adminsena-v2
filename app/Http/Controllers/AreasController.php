@@ -22,4 +22,20 @@ class AreasController extends Controller
 
         return view('areas.index', compact('areas'));
     }
+
+    public function create()
+    {
+        return view('areas.create');
+    }
+
+    public function store(Request $request)
+    {
+        $url = env('URL_SERVER_API');
+
+        Http::post($url . '/areas', [
+            'name' => $request->name,
+        ]);
+
+        return redirect()->route('areas.index');
+    }
 }
