@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1 class="mb-4">Áreas</h1>
+    <h1 class="mb-4">Areas</h1>
 
-    <a href="{{ route('areas.create') }}" class="btn btn-primary mb-3">Crear Área</a>
+    <a href="{{ route('areas.create') }}" class="btn btn-primary mb-3">Crear Area</a>
 
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
