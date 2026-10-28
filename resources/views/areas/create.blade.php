@@ -34,8 +34,8 @@
         </div>
 
         <div class="d-flex">
-            <button type="submit" class="btn btn-primary mr-2">Guardar área</button>
-            <button type="button" id="btn-clear" class="btn btn-outline-danger d-none">Eliminar imagen</button>
+            <button type="submit" class="btn btn-secondary mr-2">Guardar área</button>
+            <button type="button" id="btn-clear" class="btn btn-outline-secondary d-none">Eliminar imagen</button>
         </div>
     </form>
 

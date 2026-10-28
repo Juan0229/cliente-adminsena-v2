@@ -31,14 +31,21 @@
                         @endif
                     </td>
                     <td>
+                        <a href="{{ route('areas.edit', $area['id']) }}" class="btn btn-sm btn-secondary">Editar</a>
                         @if (!empty($area['image']))
                             <form action="{{ route('areas.removeImage', $area['id']) }}" method="POST" class="d-inline"
                                   onsubmit="return confirm('¿Eliminar la imagen del área?')">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-outline-danger">Eliminar imagen</button>
+                                <button type="submit" class="btn btn-sm btn-outline-secondary">Eliminar imagen</button>
                             </form>
                         @endif
+                        <form action="{{ route('areas.destroy', $area['id']) }}" method="POST" class="d-inline"
+                              onsubmit="return confirm('¿Eliminar el área completa?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-secondary">Eliminar</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach

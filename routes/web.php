@@ -30,7 +30,10 @@ Route::get('/', function () {
 Route::get('areas', [AreasController::class, 'index'])->name('areas.index');
 Route::get('areas/create', [AreasController::class, 'create'])->name('areas.create');
 Route::post('areas', [AreasController::class, 'store'])->name('areas.store');
+Route::get('areas/{id}/edit', [AreasController::class, 'edit'])->name('areas.edit');
+Route::put('areas/{id}', [AreasController::class, 'update'])->name('areas.update');
 Route::delete('areas/{id}/image', [AreasController::class, 'removeImage'])->name('areas.removeImage');
+Route::delete('areas/{id}', [AreasController::class, 'destroy'])->name('areas.destroy');
 
 Route::get('training_centers', [TrainingCentersController::class, 'index'])->name('training_centers.index');
 

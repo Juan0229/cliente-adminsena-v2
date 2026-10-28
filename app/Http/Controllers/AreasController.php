@@ -63,4 +63,48 @@ class AreasController extends Controller
 
         return redirect()->route('areas.index')->with('success', 'Imagen eliminada');
     }
+
+    public function destroy($id)
+    {
+        $url = env('URL_SERVER_API');
+
+        Http::delete($url . '/areas/' . $id);
+
+        return redirect()->route('areas.index')->with('success', 'Área eliminada');
+    }
+
+    public function edit($id)
+    {
+        $url = env('URL_SERVER_API');
+
+        $area = $this->fetchDataFromApi($url . '/areas/' . $id);
+
+        return view('areas.edit', compact('area'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $url = env('URL_SERVER_API');
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,jpg,png,webp|max:2048',
+        ]);
+
+        $http = Http::attach('_method', 'PUT')
+            ->attach('name', $request->name);
+
+        if ($request->hasFile('image')) {
+            $http = $http->attach(
+                'image',
+                file_get_contents($request->file('image')->getRealPath()),
+                $request->file('image')->getClientOriginalName(),
+                ['Content-Type' => $request->file('image')->getClientMimeType()]
+            );
+        }
+
+        $http->post($url . '/areas/' . $id);
+
+        return redirect()->route('areas.index')->with('success', 'Área actualizada');
+    }
 }
