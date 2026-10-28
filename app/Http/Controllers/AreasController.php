@@ -32,10 +32,35 @@ class AreasController extends Controller
     {
         $url = env('URL_SERVER_API');
 
-        Http::post($url . '/areas', [
-            'name' => $request->name,
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,jpg,png,webp|max:2048',
         ]);
 
-        return redirect()->route('areas.index');
+        $http = Http::attach(
+            'name', $request->name
+        );
+
+        if ($request->hasFile('image')) {
+            $http = $http->attach(
+                'image',
+                file_get_contents($request->file('image')->getRealPath()),
+                $request->file('image')->getClientOriginalName(),
+                ['Content-Type' => $request->file('image')->getClientMimeType()]
+            );
+        }
+
+        $response = $http->post($url . '/areas');
+
+        return redirect()->route('areas.index')->with('success', 'Área registrada correctamente');
+    }
+
+    public function removeImage($id)
+    {
+        $url = env('URL_SERVER_API');
+
+        Http::delete($url . '/areas/' . $id . '/image');
+
+        return redirect()->route('areas.index')->with('success', 'Imagen eliminada');
     }
 }
